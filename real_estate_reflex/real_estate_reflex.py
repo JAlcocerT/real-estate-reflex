@@ -141,3 +141,25 @@ class State(rx.State):
             "month": row["month"],
             "balance": row["ending_balance"]
         } for row in self.amortization_table]
+    
+    # Event handlers for toggling comparison view and CSV download
+    def toggle_comparison(self):
+        """Toggle the loan comparison view."""
+        self.show_comparison = not self.show_comparison
+        
+    def download_csv(self):
+        """Convert amortization table to CSV and provide download."""
+        if not self.amortization_table:
+            return
+            
+        # Create a DataFrame from the amortization table
+        df = pd.DataFrame(self.amortization_table)
+        csv_string = df.to_csv(index=False)
+        
+        # Return CSV file for download
+        return rx.download(csv_string, filename="amortization_schedule.csv")
+
+
+# Create an instance of the app.
+# This must be called to instantiate the app.
+app = rx.App() 
