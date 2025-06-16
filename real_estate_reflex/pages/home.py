@@ -10,7 +10,7 @@ from real_estate_reflex.components.results import (
 )
 from real_estate_reflex.real_estate_reflex import State
 
-def home() -> rx.Component:
+def index() -> rx.Component:
     """The main page of the real estate loan calculator."""
     return rx.container(
         rx.vstack(

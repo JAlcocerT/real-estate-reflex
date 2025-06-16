@@ -160,6 +160,20 @@ class State(rx.State):
         return rx.download(csv_string, filename="amortization_schedule.csv")
 
 
-# Create an instance of the app.
-# This must be called to instantiate the app.
-app = rx.App() 
+def index() -> rx.Component:
+    from real_estate_reflex.pages.home import index as home_index
+    return home_index()
+
+def amortization_page() -> rx.Component:
+    from real_estate_reflex.pages.amortization import index
+    return index()
+    
+def comparison_page() -> rx.Component:
+    from real_estate_reflex.pages.comparison import index
+    return index()
+
+# Create the app
+app = rx.App()
+app.add_page(index)
+app.add_page(amortization_page, route="/amortization")
+app.add_page(comparison_page, route="/comparison")
